@@ -1,0 +1,47 @@
+{
+  "productName": "Productivity App",
+  "version": "0.1.0",
+  "build": {
+    "frontendDist": "../dist",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
+  "identifier": "com.productivityapp.app",
+  "bundle": {
+    "active": true,
+    "targets": "msi",
+    "resources": [],
+    "copyright": "Copyright © 2025 Productivity App",
+    "category": "Productivity",
+    "shortDescription": "A modern productivity app with focus, diary, and todo features",
+    "longDescription": "A comprehensive productivity application featuring focus session tracking, daily journaling, task management, and alarm functionality. All data is stored locally with encryption and automatic backups."
+  },
+  "app": {
+    "security": {
+      "csp": {
+        "default-src": "'self'",
+        "img-src": "'self' data: blob:",
+        "style-src": "'self' 'unsafe-inline'",
+        "script-src": "'self' 'unsafe-eval'",
+        "font-src": "'self' data:",
+        "connect-src": "'self'"
+      }
+    },
+    "windows": [
+      {
+        "title": "Productivity App",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "decorations": true,
+        "transparent": false,
+        "visible": true
+      }
+    ]
+  }
+}
