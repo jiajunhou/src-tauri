@@ -6,10 +6,10 @@
     "beforeDevCommand": "",
     "beforeBuildCommand": ""
   },
-  "identifier": "com.productivityapp.app",
+  "identifier": "com.productivityapp.desktop",
   "bundle": {
     "active": true,
-    "targets": "msi",
+    "targets": ["nsis"],
     "resources": [],
     "copyright": "Copyright © 2025 Productivity App",
     "category": "Productivity",

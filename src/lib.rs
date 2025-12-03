@@ -73,41 +73,6 @@ pub fn run() {
                     window.open_devtools();
                 }
             }
-            // Background alarm checker
-            let handle = app.handle().clone();
-            tauri::async_runtime::spawn(async move {
-                use chrono::Local;
-                loop {
-                    let state = handle.state::<AppState>();
-                    let db = state.db.lock().await;
-                    let pool = db.pool();
-                    let now = Local::now();
-                    let current_hhmm = now.format("%H:%M").to_string();
-                    let weekday = now.format("%a").to_string();
-
-                    let alarms: Vec<models::Alarm> = sqlx::query_as(
-                        "SELECT * FROM alarms WHERE enabled = 1"
-                    )
-                    .fetch_all(pool)
-                    .await
-                    .unwrap_or_default();
-
-                    for alarm in alarms {
-                        let day_ok = match alarm.days.as_deref() {
-                            Some(days_json) => {
-                                let d: Vec<String> = serde_json::from_str(days_json).unwrap_or_default();
-                                d.is_empty() || d.iter().any(|x| x.eq_ignore_ascii_case(&weekday))
-                            }
-                            None => true,
-                        };
-                        if day_ok && alarm.time == current_hhmm {
-                            println!("Alarm: {}", alarm.label.clone().unwrap_or_else(|| "Alarm".to_string()));
-                        }
-                    }
-
-                    tokio::time::sleep(std::time::Duration::from_secs(30)).await;
-                }
-            });
             Ok(())
         })
         .run(context)
